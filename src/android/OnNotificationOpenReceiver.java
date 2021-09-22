@@ -7,7 +7,9 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
-import org.apache.commons.lang.SystemUtils;
+import android.app.ActivityManager;
+
+import java.util.List;
 
 public class OnNotificationOpenReceiver extends BroadcastReceiver {
 
@@ -16,7 +18,7 @@ public class OnNotificationOpenReceiver extends BroadcastReceiver {
   @Override
   public void onReceive(Context context, Intent intent) {
     //Judging whether the app process survives
-    if(SystemUtils.isAppAlive(context, "com.google.android.apps.maps")){
+    if(isAppAlive(context, "com.google.android.apps.maps")){
         //If you survive, start DetailActivity directly, but consider the case that the app process is still there
         //But the Task stack is empty, such as when the user clicks the Back key to exit the application, but the process has not been recycled by the system, if started directly.
         //Detail Activity, press the Back key again and you won't return to MainActivity. So it's starting.
@@ -45,4 +47,21 @@ public class OnNotificationOpenReceiver extends BroadcastReceiver {
         context.startActivity(launchIntent);
     }
 }
+  
+  public static boolean isAppAlive(Context context, String packageName){
+        ActivityManager activityManager =
+                (ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningAppProcessInfo> processInfos
+                = activityManager.getRunningAppProcesses();
+        for(int i = 0; i < processInfos.size(); i++){
+            if(processInfos.get(i).processName.equals(packageName)){
+                Log.i("NotificationLaunch",
+                        String.format("the %s is running, isAppAlive return true", packageName));
+                return true;
+            }
+        }
+        Log.i("NotificationLaunch",
+                String.format("the %s is not running, isAppAlive return false", packageName));
+        return false;
+    }
 }
