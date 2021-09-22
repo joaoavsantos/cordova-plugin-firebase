@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
+import java.lang.System;
 
 public class OnNotificationOpenReceiver extends BroadcastReceiver {
 
@@ -21,16 +22,12 @@ public class OnNotificationOpenReceiver extends BroadcastReceiver {
         //Detail Activity, press the Back key again and you won't return to MainActivity. So it's starting.
         //Before Detail Activity, start MainActivity.
         Log.i("NotificationReceiver", "the app process is alive");
-        Intent mainIntent = new Intent(context, MainActivity.class);
+        Uri gmmIntentUri = Uri.parse("geo:37.7749,-122.4194?q=101+main+street");
+        Intent mainIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
         //Set the launch mode of mainativity to singletask, or add intent. flag stack clear_top to the following flag. If there are instances of mainativity in the task stack, it will be moved to the top, and the activities above it will be cleaned up. If there are no instances of mainativity in the task stack, it will be created at the top.
         mainIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-        Intent detailIntent = new Intent(context, DetailActivity.class);
-        detailIntent.putExtra("name", "Rice cooker");
-        detailIntent.putExtra("price", "58  dollars");
-        detailIntent.putExtra("detail", "This is a good pot. This is where the app process exists. Start Activity directly.");
-
-        Intent[] intents = {mainIntent, detailIntent};
+        Intent[] intents = {mainIntent};
 
         context.startActivities(intents);
     }else {
