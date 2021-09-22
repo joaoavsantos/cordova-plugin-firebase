@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
-import java.lang.System;
+import org.apache.commons.lang.SystemUtils;
 
 public class OnNotificationOpenReceiver extends BroadcastReceiver {
 
