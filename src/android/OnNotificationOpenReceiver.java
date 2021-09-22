@@ -40,11 +40,6 @@ public class OnNotificationOpenReceiver extends BroadcastReceiver {
                 getLaunchIntentForPackage("com.google.android.apps.maps");
         launchIntent.setFlags(
                 Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
-        Bundle args = new Bundle();
-        args.putString("name", "Rice cooker");
-        args.putString("price", "58 dollars");
-        args.putString("detail", "This is a good pot. This is where the app process exists. Start Activity directly.");
-        launchIntent.putExtra(Constants.EXTRA_BUNDLE, args);
         context.startActivity(launchIntent);
     }
 }
