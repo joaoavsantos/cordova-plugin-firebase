@@ -3,6 +3,7 @@ package org.apache.cordova.firebase;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -28,10 +29,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import hr.mireo.arthur.api.API;
+import hr.mireo.arthur.api.APIAsyncRequest;
+import hr.mireo.arthur.api.EasyAPI;
+import hr.mireo.arthur.api.GeoAddress;
+import hr.mireo.arthur.api.DisplaySurface;
+
 public class FirebasePluginMessagingService extends FirebaseMessagingService {
 
   private static final String TAG = "FirebasePlugin";
   protected static final String KEY = "badge";
+  private EasyAPI mAPI;
 
   /**
    * Get a string from resources without importing the .R package
@@ -72,6 +80,21 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
     // and data payloads are treated as notification messages. The Firebase console always sends notification
     // messages. For more see: https://firebase.google.com/docs/cloud-messaging/concept-options
     // [END_EXCLUDE]
+    
+    // create API instance
+        mAPI = new EasyAPI("gm", cordova.getContext(), new ComponentName("com.daf.smartphone", "hr.mireo.arthur.common.services.APIMessengerService"));
+        mAPI.setScreenFlags(DisplaySurface.screen_is_weblink);
+    
+    cordova.getThreadPool().execute(new Runnable() {
+            public void run() {
+                    boolean navigationResult = navigateTo();
+
+                    PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, navigationResult);
+                    callbackContext.sendPluginResult(pluginResult);
+                }
+            });
+    
+    
     
     Log.d(TAG, "FirebasePluginMessagingService onMessageReceived called");
 
@@ -162,6 +185,31 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
       sendNotification(id, title, text, data, showNotification, sound, lights);
     }
   }
+  
+  public boolean navigateTo()
+    {
+        AtomicReference<Integer> apiResult = new AtomicReference<>(API.RESULT_FAIL);
+
+        GeoAddress address = new GeoAddress();
+    address.area = "Overijssel|OV";
+    address.houseNumber = String.valueOf(53);
+    address.postal = "7711";
+    address.country = "Nederland";
+    address.iso = 528;
+    address.street = "Bosmansweg";
+    address.city = "Nieuwleusen, Dalfsen";
+    address.setLonLat(6.276339590549469, 52.58167967539245);
+    address.type = String.valueOf(1080);
+        
+        
+        EasyAPI.AddressResult listener = (status, foundAddress) -> {
+            apiResult.set(status);
+        };
+        Log.v("Mireo-Plugin", listener.toString());
+        mAPI.navigateTo(address, noUI, listener).waitForResult(20_000);
+
+        return apiResult.get() == API.RESULT_OK;
+    }
 
   private void sendNotification(String id, String title, String messageBody, Map<String, String> data, boolean showNotification, String sound, String lights) {
     Bundle bundle = new Bundle();
