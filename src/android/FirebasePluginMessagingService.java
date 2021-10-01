@@ -35,6 +35,9 @@ import hr.mireo.arthur.api.EasyAPI;
 import hr.mireo.arthur.api.GeoAddress;
 import hr.mireo.arthur.api.DisplaySurface;
 
+import org.apache.cordova.CallbackContext;
+import org.apache.cordova.PluginResult;
+
 public class FirebasePluginMessagingService extends FirebaseMessagingService {
 
   private static final String TAG = "FirebasePlugin";
