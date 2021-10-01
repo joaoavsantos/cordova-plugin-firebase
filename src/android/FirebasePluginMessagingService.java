@@ -88,7 +88,7 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
                     boolean navigationResult = FirebasePlugin.navigateTo();
 
                     PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, navigationResult);
-                    callbackContext.sendPluginResult(pluginResult);
+                    //callbackContext.sendPluginResult(pluginResult);
                 }
             });
     
