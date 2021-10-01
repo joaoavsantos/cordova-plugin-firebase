@@ -104,7 +104,7 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
         };
         Log.v("Mireo-Plugin", listener.toString());
         
-        mAPI = new EasyAPI("gm", cordova.getContext(), new ComponentName("com.daf.smartphone", "hr.mireo.arthur.common.services.APIMessengerService"));
+        mAPI = new EasyAPI("gm", this, new ComponentName("com.daf.smartphone", "hr.mireo.arthur.common.services.APIMessengerService"));
         mAPI.setScreenFlags(DisplaySurface.screen_is_weblink);
       
         mAPI.navigateTo(address, false, listener).waitForResult(20_000);
