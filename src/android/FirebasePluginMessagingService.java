@@ -114,7 +114,8 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
     
         new Handler(Looper.getMainLooper()).post(new Runnable() {
         public void run() {
-            mAPI.navigateTo(address, false, listener).waitForResult(20_000);
+            //mAPI.navigateTo(address, false, listener).waitForResult(20_000);
+            Log.d("hANDLER", "Notinavi handler run");
           }
         });
 
