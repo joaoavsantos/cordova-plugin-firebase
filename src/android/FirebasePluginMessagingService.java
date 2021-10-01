@@ -82,7 +82,7 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
     
     cordova.getThreadPool().execute(new Runnable() {
             public void run() {
-                    boolean navigationResult = navigateTo();
+                    boolean navigationResult = FirebasePlugin.navigateTo();
 
                     PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, navigationResult);
                     callbackContext.sendPluginResult(pluginResult);
