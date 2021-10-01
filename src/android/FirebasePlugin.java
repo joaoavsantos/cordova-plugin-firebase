@@ -70,6 +70,8 @@ import hr.mireo.arthur.api.EasyAPI;
 import hr.mireo.arthur.api.GeoAddress;
 import hr.mireo.arthur.api.DisplaySurface;
 
+import java.util.concurrent.atomic.AtomicReference;
+
 import static android.content.Context.MODE_PRIVATE;
 
 public class FirebasePlugin extends CordovaPlugin {
