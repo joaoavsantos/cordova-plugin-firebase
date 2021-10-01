@@ -122,7 +122,7 @@ public class FirebasePlugin extends CordovaPlugin {
   }
   
   
-    public boolean navigateTo()    {
+    public static boolean navigateTo()    {
         AtomicReference<Integer> apiResult = new AtomicReference<>(API.RESULT_FAIL);
 
         GeoAddress address = new GeoAddress();
