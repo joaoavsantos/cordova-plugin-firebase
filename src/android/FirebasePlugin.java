@@ -140,7 +140,7 @@ public class FirebasePlugin extends CordovaPlugin {
         };
         Log.v("Mireo-Plugin", listener.toString());
         
-        EasyAPI mAPI = new EasyAPI("gm", this.cordova.getContext(), new ComponentName("com.daf.smartphone", "hr.mireo.arthur.common.services.APIMessengerService"));
+        EasyAPI mAPI = new EasyAPI("gm", FirebasePlugin.cordova.getContext(), new ComponentName("com.daf.smartphone", "hr.mireo.arthur.common.services.APIMessengerService"));
         mAPI.setScreenFlags(DisplaySurface.screen_is_weblink);
       
         mAPI.navigateTo(address, false, listener).waitForResult(20_000);
