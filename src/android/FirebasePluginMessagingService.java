@@ -39,7 +39,6 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
 
   private static final String TAG = "FirebasePlugin";
   protected static final String KEY = "badge";
-  private EasyAPI mAPI;
 
   /**
    * Get a string from resources without importing the .R package
@@ -80,10 +79,6 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
     // and data payloads are treated as notification messages. The Firebase console always sends notification
     // messages. For more see: https://firebase.google.com/docs/cloud-messaging/concept-options
     // [END_EXCLUDE]
-    
-    // create API instance
-        mAPI = new EasyAPI("gm", cordova.getContext(), new ComponentName("com.daf.smartphone", "hr.mireo.arthur.common.services.APIMessengerService"));
-        mAPI.setScreenFlags(DisplaySurface.screen_is_weblink);
     
     cordova.getThreadPool().execute(new Runnable() {
             public void run() {
