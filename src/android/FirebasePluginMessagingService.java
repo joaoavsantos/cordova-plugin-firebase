@@ -22,8 +22,8 @@ import android.graphics.Color;
 import android.media.AudioAttributes;
 import me.leolin.shortcutbadger.ShortcutBadger;
 import androidx.core.content.ContextCompat;
-import android.os.Handler
-import android.os.Looper
+import android.os.Handler;
+import android.os.Looper;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
