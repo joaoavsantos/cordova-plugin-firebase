@@ -112,8 +112,8 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
         void workerThread() {
         ContextCompat.getMainExecutor(context).execute(()  -> {
         mAPI.navigateTo(address, false, listener).waitForResult(20_000);
-          }
-        };
+          };
+        }
     
     
     
