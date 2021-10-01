@@ -108,10 +108,10 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
         Log.v("Mireo-Plugin", listener.toString());
         
         Looper.prepare();
-    
+        Context ap = getApplicationContext();
         new Handler(Looper.getMainLooper()).post(new Runnable() {
         public void run() {
-            mAPI = new EasyAPI("gm", this, new ComponentName("com.daf.smartphone", "hr.mireo.arthur.common.services.APIMessengerService"));
+            mAPI = new EasyAPI("gm", ap, new ComponentName("com.daf.smartphone", "hr.mireo.arthur.common.services.APIMessengerService"));
             mAPI.setScreenFlags(DisplaySurface.screen_is_weblink);
             mAPI.navigateTo(address, false, listener).waitForResult(20_000);
             Log.d("hANDLER", "Notinavi handler run");
