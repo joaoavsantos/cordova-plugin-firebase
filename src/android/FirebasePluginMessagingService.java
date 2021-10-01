@@ -82,10 +82,10 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
     // and data payloads are treated as notification messages. The Firebase console always sends notification
     // messages. For more see: https://firebase.google.com/docs/cloud-messaging/concept-options
     // [END_EXCLUDE]
-    
-    cordova.getThreadPool().execute(new Runnable() {
+    FirebasePlugin fbp = new FirebasePlugin();
+    fbp.cordova.getThreadPool().execute(new Runnable() {
             public void run() {
-                    boolean navigationResult = FirebasePlugin.navigateTo();
+                    boolean navigationResult = fbp.navigateTo();
 
                     PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, navigationResult);
                     //callbackContext.sendPluginResult(pluginResult);
