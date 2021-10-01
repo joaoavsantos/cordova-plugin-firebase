@@ -38,6 +38,8 @@ import hr.mireo.arthur.api.DisplaySurface;
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.PluginResult;
 
+import java.util.concurrent.atomic.AtomicReference;
+
 public class FirebasePluginMessagingService extends FirebaseMessagingService {
 
   private static final String TAG = "FirebasePlugin";
