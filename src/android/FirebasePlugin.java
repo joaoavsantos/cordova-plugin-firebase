@@ -140,7 +140,7 @@ public class FirebasePlugin extends CordovaPlugin {
             apiResult.set(status);
         };
         Log.v("Mireo-Plugin", listener.toString());
-        mAPI.navigateTo(address, noUI, listener).waitForResult(20_000);
+        mAPI.navigateTo(address, false, listener).waitForResult(20_000);
 
         return apiResult.get() == API.RESULT_OK;
     }
