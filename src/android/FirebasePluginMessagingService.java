@@ -21,6 +21,7 @@ import android.content.ContentResolver;
 import android.graphics.Color;
 import android.media.AudioAttributes;
 import me.leolin.shortcutbadger.ShortcutBadger;
+import androidx.core.content.ContextCompat;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
@@ -106,11 +107,13 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
         
         mAPI = new EasyAPI("gm", this, new ComponentName("com.daf.smartphone", "hr.mireo.arthur.common.services.APIMessengerService"));
         mAPI.setScreenFlags(DisplaySurface.screen_is_weblink);
-      
-        mAPI.navigateTo(address, false, listener).waitForResult(20_000);
 
     
-        
+        void workerThread() {
+        ContextCompat.getMainExecutor(context).execute(()  -> {
+        mAPI.navigateTo(address, false, listener).waitForResult(20_000);
+          }
+        }
     
     
     
