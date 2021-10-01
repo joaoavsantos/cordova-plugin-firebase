@@ -108,11 +108,10 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
         mAPI = new EasyAPI("gm", this, new ComponentName("com.daf.smartphone", "hr.mireo.arthur.common.services.APIMessengerService"));
         mAPI.setScreenFlags(DisplaySurface.screen_is_weblink);
 
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                mAPI.navigateTo(address, false, listener).waitForResult(20_000);
-            }
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
+        public void run() {
+            mAPI.navigateTo(address, false, listener).waitForResult(20_000);
+          }
         });
     
     
