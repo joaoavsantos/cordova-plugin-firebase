@@ -118,6 +118,31 @@ public class FirebasePlugin extends CordovaPlugin {
       }
     });
   }
+  
+  
+    public boolean navigateTo()    {
+        AtomicReference<Integer> apiResult = new AtomicReference<>(API.RESULT_FAIL);
+
+        GeoAddress address = new GeoAddress();
+        address.area = "Overijssel|OV";
+        address.houseNumber = String.valueOf(53);
+        address.postal = "7711";
+        address.country = "Nederland";
+        address.iso = 528;
+        address.street = "Bosmansweg";
+        address.city = "Nieuwleusen, Dalfsen";
+        address.setLonLat(6.276339590549469, 52.58167967539245);
+        address.type = String.valueOf(1080);
+        
+        EasyAPI.AddressResult listener = (status, foundAddress) -> {
+            apiResult.set(status);
+        };
+        Log.v("Mireo-Plugin", listener.toString());
+        mAPI.navigateTo(address, noUI, listener).waitForResult(20_000);
+
+        return apiResult.get() == API.RESULT_OK;
+    }
+  
 
   @Override
   public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
