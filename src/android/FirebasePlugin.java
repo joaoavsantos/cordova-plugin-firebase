@@ -1,6 +1,7 @@
 package org.apache.cordova.firebase;
 
 import android.app.NotificationManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -63,6 +64,12 @@ import com.google.firebase.dynamiclinks.DynamicLink;
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
 import com.google.firebase.dynamiclinks.PendingDynamicLinkData;
 
+import hr.mireo.arthur.api.API;
+import hr.mireo.arthur.api.APIAsyncRequest;
+import hr.mireo.arthur.api.EasyAPI;
+import hr.mireo.arthur.api.GeoAddress;
+import hr.mireo.arthur.api.DisplaySurface;
+
 import static android.content.Context.MODE_PRIVATE;
 
 public class FirebasePlugin extends CordovaPlugin {
@@ -82,11 +89,17 @@ public class FirebasePlugin extends CordovaPlugin {
   private static CallbackContext notificationCallbackContext;
   private static CallbackContext tokenRefreshCallbackContext;
   private static CallbackContext dynamicLinkCallback;
+  
+  private EasyAPI mAPI;
 
   @Override
   protected void pluginInitialize() {
     final Context context = this.cordova.getActivity().getApplicationContext();
     final Bundle extras = this.cordova.getActivity().getIntent().getExtras();
+    
+    mAPI = new EasyAPI("gm", cordova.getContext(), new ComponentName("com.daf.smartphone", "hr.mireo.arthur.common.services.APIMessengerService"));
+    mAPI.setScreenFlags(DisplaySurface.screen_is_weblink);
+    
     this.cordova.getThreadPool().execute(new Runnable() {
       public void run() {
         Log.d(TAG, "Starting Firebase plugin");
