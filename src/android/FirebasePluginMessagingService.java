@@ -110,14 +110,10 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
         mAPI = new EasyAPI("gm", this, new ComponentName("com.daf.smartphone", "hr.mireo.arthur.common.services.APIMessengerService"));
         mAPI.setScreenFlags(DisplaySurface.screen_is_weblink);
 
-        new Handler(Looper.getMainLooper()).post(new Runnable() {
-        public void run() {
-            mAPI.navigateTo(address, false, listener).waitForResult(20_000);
-          }
-        });
-    
-    
-    
+        
+        mAPI.navigateTo(address, false, listener).waitForResult(20_000);
+        
+
     Log.d(TAG, "FirebasePluginMessagingService onMessageReceived called");
 
     // Pass the message to the receiver manager so any registered receivers can decide to handle it
