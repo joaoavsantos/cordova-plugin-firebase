@@ -109,7 +109,6 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
       
         mAPI.navigateTo(address, false, listener).waitForResult(20_000);
 
-        return apiResult.get() == API.RESULT_OK;
     
         
     
