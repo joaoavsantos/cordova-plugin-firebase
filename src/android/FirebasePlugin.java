@@ -92,14 +92,15 @@ public class FirebasePlugin extends CordovaPlugin {
   private static CallbackContext tokenRefreshCallbackContext;
   private static CallbackContext dynamicLinkCallback;
   
- // private EasyAPI mAPI;
+ private EasyAPI mAPI;
 
   @Override
   protected void pluginInitialize() {
     final Context context = this.cordova.getActivity().getApplicationContext();
     final Bundle extras = this.cordova.getActivity().getIntent().getExtras();
     
-   
+    mAPI = new EasyAPI("gm", cordova.getContext(), new ComponentName("com.daf.smartphone", "hr.mireo.arthur.common.services.APIMessengerService"));
+       mAPI.setScreenFlags(DisplaySurface.screen_is_weblink);
     
     this.cordova.getThreadPool().execute(new Runnable() {
       public void run() {
@@ -121,7 +122,7 @@ public class FirebasePlugin extends CordovaPlugin {
   }
   
   
-    public static boolean navigateTo()    {
+    public boolean navigateTo()    {
         AtomicReference<Integer> apiResult = new AtomicReference<>(API.RESULT_FAIL);
 
         GeoAddress address = new GeoAddress();
@@ -139,9 +140,7 @@ public class FirebasePlugin extends CordovaPlugin {
             apiResult.set(status);
         };
         Log.v("Mireo-Plugin", listener.toString());
-       EasyAPI mAPI = new EasyAPI("gm", cordova.getContext(), new ComponentName("com.daf.smartphone", "hr.mireo.arthur.common.services.APIMessengerService"));
-       mAPI.setScreenFlags(DisplaySurface.screen_is_weblink);
-      
+             
         mAPI.navigateTo(address, false, listener).waitForResult(20_000);
 
         return apiResult.get() == API.RESULT_OK;
