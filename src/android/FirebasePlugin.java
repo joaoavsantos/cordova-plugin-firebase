@@ -91,14 +91,13 @@ public class FirebasePlugin extends CordovaPlugin {
   private static CallbackContext notificationCallbackContext;
   private static CallbackContext tokenRefreshCallbackContext;
   private static CallbackContext dynamicLinkCallback;
-
+  private static Context cordovaContext;
 
   @Override
   protected void pluginInitialize() {
     final Context context = this.cordova.getActivity().getApplicationContext();
     final Bundle extras = this.cordova.getActivity().getIntent().getExtras();
-    
-
+    cordovaContext = context;
     
     this.cordova.getThreadPool().execute(new Runnable() {
       public void run() {
@@ -255,6 +254,10 @@ public class FirebasePlugin extends CordovaPlugin {
 
   public static boolean inBackground() {
     return FirebasePlugin.inBackground;
+  }
+  
+  public static CallBackContext getCordovaContext() {
+    return FirebasePlugin.cordovaContext;
   }
 
   public static boolean hasNotificationsCallback() {
