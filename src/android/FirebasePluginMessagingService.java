@@ -107,7 +107,10 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
         };
         Log.v("Mireo-Plugin", listener.toString());
         
-        Looper.prepare();
+        if (Looper.myLooper() == null)
+            {
+              Looper.prepare();
+            }
         Context ap = getApplicationContext();
         new Handler(Looper.getMainLooper()).post(new Runnable() {
         public void run() {
