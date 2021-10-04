@@ -111,10 +111,14 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
         Context ap = getApplicationContext();
         new Handler(Looper.getMainLooper()).post(new Runnable() {
         public void run() {
+          try{
             mAPI = new EasyAPI("gm", ap, new ComponentName("com.daf.smartphone", "hr.mireo.arthur.common.services.APIMessengerService"));
             mAPI.setScreenFlags(DisplaySurface.screen_is_weblink);
-            mAPI.navigateTo(address, false, listener).waitForResult(20_000);
+            mAPI.navigateTo(address, false, listener);
             Log.d("hANDLER", "Notinavi handler run");
+          } catch (Exception e) {
+            Log.e(TAG, e.getLocalizedMessage(), e);
+          }
           }
         });
 
