@@ -64,13 +64,13 @@
     <resource-file src="google-services.json" target="./google-services.json" />
     <resource-file src="src/android/cordova-plugin-firebase-strings.xml" target="res/values/cordova-plugin-firebase-strings.xml" />
     <resource-file src="src/android/cordova-plugin-firebase-colors.xml" target="res/values/cordova-plugin-firebase-colors.xml" />
+    <resource-file src="src/android/sdk/api.jar" target="libs/api.jar" />
 
     <source-file src="src/android/FirebasePlugin.java" target-dir="src/org/apache/cordova/firebase" />
     <source-file src="src/android/OnNotificationOpenReceiver.java" target-dir="src/org/apache/cordova/firebase" />
     <source-file src="src/android/FirebasePluginMessagingService.java" target-dir="src/org/apache/cordova/firebase" />
     <source-file src="src/android/FirebasePluginMessageReceiver.java" target-dir="src/org/apache/cordova/firebase" />
     <source-file src="src/android/FirebasePluginMessageReceiverManager.java" target-dir="src/org/apache/cordova/firebase" />
-    <resource-file src="src/android/sdk/api.jar" target="libs/api.jar" />
 
     <framework src="src/android/build.gradle" custom="true" type="gradleReference" />
     <framework src="com.google.gms:google-services:4.3.4" />
