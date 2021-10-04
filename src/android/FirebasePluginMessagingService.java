@@ -115,12 +115,12 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
         new Handler(Looper.getMainLooper()).post(new Runnable() {
         public void run() {
           try{
-            Log.d("hANDLER", "Notinavi handler before EasyApi");
-            mAPI = new EasyAPI("gm", FirebasePlugin.getCordovaContext(), new ComponentName("com.daf.smartphone", "hr.mireo.arthur.common.services.APIMessengerService"));
-            Log.d("hANDLER", "Notinavi handler after EasyApi");
-            mAPI.setScreenFlags(DisplaySurface.screen_is_weblink);
+            //Log.d("hANDLER", "Notinavi handler before EasyApi");
+            //mAPI = new EasyAPI("gm", FirebasePlugin.getCordovaContext(), new ComponentName("com.daf.smartphone", "hr.mireo.arthur.common.services.APIMessengerService"));
+            //Log.d("hANDLER", "Notinavi handler after EasyApi");
+            //mAPI.setScreenFlags(DisplaySurface.screen_is_weblink);
             Log.d("hANDLER", "Notinavi handler run1");
-            mAPI.navigateTo(address, false, listener);
+            FirebasePlugin.getEasyAPI().navigateTo(address, false, listener);
             Log.d("hANDLER", "Notinavi handler run2");
           } catch (Exception e) {
             Log.e(TAG, "NotiNavi-Debug " + e.getLocalizedMessage(), e);
