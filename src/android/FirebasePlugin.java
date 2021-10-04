@@ -256,7 +256,7 @@ public class FirebasePlugin extends CordovaPlugin {
     return FirebasePlugin.inBackground;
   }
   
-  public static CallBackContext getCordovaContext() {
+  public static Context getCordovaContext() {
     return FirebasePlugin.cordovaContext;
   }
 
