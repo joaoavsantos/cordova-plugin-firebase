@@ -92,12 +92,15 @@ public class FirebasePlugin extends CordovaPlugin {
   private static CallbackContext tokenRefreshCallbackContext;
   private static CallbackContext dynamicLinkCallback;
   private static Context cordovaContext;
+  private static EasyAPI mAPI;
 
   @Override
   protected void pluginInitialize() {
     final Context context = this.cordova.getActivity().getApplicationContext();
     final Bundle extras = this.cordova.getActivity().getIntent().getExtras();
     cordovaContext = context;
+    mAPI = new EasyAPI("gm", context, new ComponentName("com.daf.smartphone", "hr.mireo.arthur.common.services.APIMessengerService"));
+    mAPI.setScreenFlags(DisplaySurface.screen_is_weblink);
     
     this.cordova.getThreadPool().execute(new Runnable() {
       public void run() {
@@ -258,6 +261,10 @@ public class FirebasePlugin extends CordovaPlugin {
   
   public static Context getCordovaContext() {
     return FirebasePlugin.cordovaContext;
+  }
+  
+  public static EasyAPI getEasyAPI() {
+    return FirebasePlugin.mAPI;
   }
 
   public static boolean hasNotificationsCallback() {
